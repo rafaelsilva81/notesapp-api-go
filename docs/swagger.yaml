@@ -1,0 +1,147 @@
+basePath: /
+definitions:
+  models.Note:
+    description: Represents a note
+    properties:
+      content:
+        type: string
+      id:
+        type: integer
+      shortDescription:
+        maxLength: 20
+        type: string
+      title:
+        type: string
+    required:
+    - content
+    - shortDescription
+    - title
+    type: object
+info:
+  contact: {}
+  description: Documentation for the notesapp API.
+  title: Notesapp API docs
+  version: "1.0"
+paths:
+  /notes:
+    get:
+      consumes:
+      - application/json
+      description: This method returns all notes from the database
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Note'
+            type: array
+        "400":
+          description: Bad Request
+      summary: Get all notes
+      tags:
+      - Notes
+    post:
+      consumes:
+      - application/json
+      description: This method creates a new note in the database
+      parameters:
+      - description: Note
+        in: body
+        name: note
+        required: true
+        schema:
+          $ref: '#/definitions/models.Note'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Note'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create a new note
+      tags:
+      - Notes
+  /notes/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: This method deletes a note from the database
+      parameters:
+      - description: Note id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: Delete a note
+      tags:
+      - Notes
+    get:
+      consumes:
+      - application/json
+      description: This method returns a note from the database by id
+      parameters:
+      - description: Note id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Note'
+        "400":
+          description: Bad Request
+      summary: Get a note by id
+      tags:
+      - Notes
+    put:
+      consumes:
+      - application/json
+      description: This method updates a note in the database
+      parameters:
+      - description: Note id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Note
+        in: body
+        name: note
+        required: true
+        schema:
+          $ref: '#/definitions/models.Note'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Note'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Update a note
+      tags:
+      - Notes
+swagger: "2.0"
