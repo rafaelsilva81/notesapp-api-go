@@ -19,7 +19,9 @@ func NewNoteService() (*NoteService, error) {
         id INTEGER PRIMARY KEY,
         title TEXT NOT NULL,
         content TEXT NOT NULL,
-				shortDescription TEXT NOT NULL
+				shortDescription TEXT NOT NULL,
+				userId INTEGER NOT NULL,
+        FOREIGN KEY(userId) REFERENCES users(id)
     )`
 
 	if _, err := db.Exec(createTableQuery); err != nil {

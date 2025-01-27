@@ -1,8 +1,9 @@
 package models
 
 // Note represents a note
-// @title Note
-// @description Represents a note
+// @title Title of the note
+// @content Content of the note
+// @shortDescription Short description of the note
 type Note struct {
 	ID               int    `json:"id"`
 	Title            string `json:"title" validate:"required"`
